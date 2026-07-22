@@ -80,6 +80,21 @@ button:hover{
 .hidden{
     display:none;
 }
+
+#emoji{
+    font-size:60px;
+    margin-bottom:20px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-8px);
+    }
+}
 </style>
 
 </head>
@@ -90,7 +105,7 @@ button:hover{
 <h1 id="title"></h1>
 <p id="text"></p>
 <small id="clock"></small>
-<button id="openBtn">💌 Buka surat hari ini</button>
+<button id="openBtn">pencet ajahh</button>
 </div>
 
 <script>
@@ -158,6 +173,7 @@ if(hour>=5&&hour<11) greet=data.morning;
 else if(hour>=11&&hour<15) greet=data.afternoon;
 else if(hour>=15&&hour<18) greet=data.evening;
 else greet=data.night;
+emoji.innerHTML = greet.emoji;
 
 const title = document.getElementById("title");
 const text = document.getElementById("text");
