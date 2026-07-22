@@ -162,6 +162,7 @@ else greet=data.night;
 const title = document.getElementById("title");
 const text = document.getElementById("text");
 const button = document.getElementById("openBtn");
+const emoji = document.getElementById("emoji");
 
 title.innerHTML="";
 text.innerHTML="";
@@ -183,6 +184,8 @@ function typeWriter(element, tulisan, speed, callback){
 }
 
 button.onclick=()=>{
+
+    emoji.innerHTML = greet.emoji;
 
     button.style.display="none";
 
