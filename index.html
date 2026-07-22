@@ -60,6 +60,26 @@ display:block;
 margin-top:20px;
 color:#888;
 }
+
+button{
+    margin-top:20px;
+    padding:12px 24px;
+    border:none;
+    border-radius:15px;
+    background:#ff6fa7;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+.hidden{
+    display:none;
+}
 </style>
 
 </head>
@@ -70,6 +90,7 @@ color:#888;
 <h1 id="title"></h1>
 <p id="text"></p>
 <small id="clock"></small>
+<button id="openBtn">💌 Buka surat hari ini</button>
 </div>
 
 <script>
@@ -138,9 +159,47 @@ else if(hour>=11&&hour<15) greet=data.afternoon;
 else if(hour>=15&&hour<18) greet=data.evening;
 else greet=data.night;
 
-document.getElementById("emoji").innerHTML=greet.emoji;
-document.getElementById("title").innerHTML=greet.title;
-document.getElementById("text").innerHTML=greet.text[Math.floor(Math.random()*greet.text.length)];
+const title = document.getElementById("title");
+const text = document.getElementById("text");
+const button = document.getElementById("openBtn");
+
+title.innerHTML="";
+text.innerHTML="";
+
+function typeWriter(element, tulisan, speed, callback){
+    let i=0;
+
+    function ketik(){
+        if(i<tulisan.length){
+            element.innerHTML += tulisan.charAt(i);
+            i++;
+            setTimeout(ketik,speed);
+        }else if(callback){
+            callback();
+        }
+    }
+
+    ketik();
+}
+
+button.onclick=()=>{
+
+    button.style.display="none";
+
+    const randomText=
+    greet.text[Math.floor(Math.random()*greet.text.length)];
+
+    typeWriter(title,greet.title,60,()=>{
+
+        setTimeout(()=>{
+
+            typeWriter(text,randomText,30);
+
+        },400);
+
+    });
+
+}
 
 function jam(){
 const now=new Date();
